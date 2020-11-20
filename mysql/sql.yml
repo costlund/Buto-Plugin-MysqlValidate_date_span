@@ -1,0 +1,102 @@
+db_check_conflict_blank:
+  sql: |
+    select 
+    id 
+    from [table_name] 
+    where 
+    [key_fields]
+  params:
+  select:
+    - id
+db_check_conflict_date2:
+  sql: |
+    select 
+    id 
+    from [table_name] 
+    where 
+    (
+    isnull([date1])
+    or [date1]<=?
+    or [date2]<=?
+    ) 
+    [key_fields]
+  params:
+    -
+      type: s
+      value: rs:date2
+    -
+      type: s
+      value: rs:date2
+  select:
+    - id
+db_check_conflict_date1:
+  sql: |
+    select 
+    id 
+    from [table_name] 
+    where 
+    (
+    isnull([date2])
+    or [date1]>=?
+    or [date2]>=?
+    ) 
+    [key_fields]
+  params:
+    -
+      type: s
+      value: rs:date1
+    -
+      type: s
+      value: rs:date1
+  select:
+    - id
+db_check_conflict_date1_date2:
+  sql: |
+    select 
+    id 
+    from [table_name] 
+    where 
+    (
+       [date1]<=? and [date2]>=? 
+    or [date1]<=? and [date2]>=? 
+    or [date1]>? and [date2]< ? 
+    or [date1]<=? and isnull([date2]) 
+    or [date1]<=? and isnull([date2]) 
+    or [date2]>=? and isnull([date1]) 
+    or [date2]>=? and isnull([date1]) 
+    or isnull([date1]) and isnull([date2]) 
+    ) 
+    [key_fields]
+  params:
+    -
+      type: s
+      value: rs:date1
+    -
+      type: s
+      value: rs:date1
+    -
+      type: s
+      value: rs:date2
+    -
+      type: s
+      value: rs:date2
+    -
+      type: s
+      value: rs:date1
+    -
+      type: s
+      value: rs:date2
+    -
+      type: s
+      value: rs:date1
+    -
+      type: s
+      value: rs:date2
+    -
+      type: s
+      value: rs:date1
+    -
+      type: s
+      value: rs:date2
+  select:
+    - id
