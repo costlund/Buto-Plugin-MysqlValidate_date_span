@@ -8,6 +8,7 @@ class PluginMysqlValidate_date_span{
     wfPlugin::includeonce('wf/mysql');
     $this->mysql = new PluginWfMysql();
     $this->settings = wfPlugin::getPluginSettings('mysql/validate_date_span', true);
+    wfPlugin::includeonce('i18n/translate_v1');
   }
   private function db_open(){
     $this->mysql->open($this->settings->get('data/mysql'));
@@ -85,6 +86,8 @@ class PluginMysqlValidate_date_span{
   public function validate_date_span($field, $form, $data = array()){
     $form = new PluginWfArray($form);
     $data = new PluginWfArray($data);
+    $i18n = new PluginI18nTranslate_v1();
+    $i18n->setPath('/plugin/mysql/validate_date_span/i18n');
     /**
      * Check if dates is in right order.
      */
@@ -92,7 +95,7 @@ class PluginMysqlValidate_date_span{
       if($form->get("items/".$data->get('items/date1')."/post_value") && $form->get("items/".$data->get('items/date2')."/post_value")){
         if(strtotime($form->get("items/".$data->get('items/date1')."/post_value")) > strtotime($form->get("items/".$data->get('items/date2')."/post_value"))){
           $form->set("items/$field/is_valid", false);
-          $form->set("items/$field/errors/", 'Date to is before date from.');
+          $form->set("items/$field/errors/", $i18n->translateFromTheme("Date to is before date from."));
         }
       }
     }
@@ -102,7 +105,7 @@ class PluginMysqlValidate_date_span{
     if($form->get("items/".$data->get('items/date1')."/is_valid") && $form->get("items/".$data->get('items/date2')."/is_valid")){
       if($this->db_check_conflict($data)){
         $form->set("items/$field/is_valid", false);
-        $form->set("items/$field/errors/", 'Date overlapping error.');
+        $form->set("items/$field/errors/", $i18n->translateFromTheme("Date overlapping error."));
       }
     }
     return $form->get();    
