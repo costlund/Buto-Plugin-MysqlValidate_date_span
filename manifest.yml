@@ -1,5 +1,9 @@
-version: 1.0.1
+version: 1.0.2
 history:
+  1.0.2:
+    date: '2021-11-02'
+    title: Readme
+    description: 'Readme improvement.'
   1.0.1:
     date: '2020-11-20'
     title: I18N

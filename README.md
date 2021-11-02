@@ -14,7 +14,14 @@ plugin:
 ```
 
 ## Usage
+table_name, name of db table
+db/date1, name of db field date 1.
+db/date2, name of db field date 2.
+db/key_fields, extra fields to be involved.
+items/date1, name of form field date 1.
+items/date2, name of form field date 2.
 
+### Example 1
 Form settings example 1.
 ```
 items:
@@ -53,7 +60,7 @@ items:
     label: Date to
     default: rs:date_to
 ```
-
+### Example 2
 Form settings example 2.
 Param clean_up_key has default value of id. If id of table in request is not the same one could set this.
 ```
