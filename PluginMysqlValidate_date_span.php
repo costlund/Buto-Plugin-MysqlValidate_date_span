@@ -34,9 +34,9 @@ class PluginMysqlValidate_date_span{
     /**
      * 
      */
-    $sql->set('sql', str_replace('[table_name]', $data->get('db/table_name'), $sql->get('sql')));
-    $sql->set('sql', str_replace('[date1]', $data->get('db/date1'), $sql->get('sql')));
-    $sql->set('sql', str_replace('[date2]', $data->get('db/date2'), $sql->get('sql')));
+    $sql->set('sql', wfPhpfunc::str_replace('[table_name]', $data->get('db/table_name'), $sql->get('sql')));
+    $sql->set('sql', wfPhpfunc::str_replace('[date1]', $data->get('db/date1'), $sql->get('sql')));
+    $sql->set('sql', wfPhpfunc::str_replace('[date2]', $data->get('db/date2'), $sql->get('sql')));
     /**
      * 
      */
@@ -53,9 +53,9 @@ class PluginMysqlValidate_date_span{
       }
     }
     if($blank && $key_fields_sql){
-      $key_fields_sql = substr($key_fields_sql, 4);
+      $key_fields_sql = wfPhpfunc::substr($key_fields_sql, 4);
     }
-    $sql->set('sql', str_replace('[key_fields]', $key_fields_sql, $sql->get('sql')));
+    $sql->set('sql', wfPhpfunc::str_replace('[key_fields]', $key_fields_sql, $sql->get('sql')));
     /**
      * 
      */
